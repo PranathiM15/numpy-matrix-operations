@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17142b">
+  <meta name="description" content="An interactive NumPy-powered matrix calculator for addition, subtraction, multiplication and transpose operations.">
+  <title>Matrix Studio — NumPy Lab</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Matrix Studio home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span><strong>matrix<span class="brand-dot">.</span>studio</strong><small>NUMPY LAB / TASK 14</small></span>
+      </a>
+      <div class="topbar-right"><span class="status-dot"></span><span>Python engine connected</span><span class="version-pill">v1.0</span></div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> YOUR INTERACTIVE WORKSPACE</div>
+          <h1>Think in <em>matrices.</em><br>Compute with NumPy.</h1>
+          <p>Explore the building blocks of machine learning. Edit two matrices, choose an operation, and see the result computed by Python's NumPy engine.</p>
+          <div class="hero-chips"><span>01 / CREATE</span><span>02 / OPERATE</span><span>03 / UNDERSTAND</span></div>
+        </div>
+        <div class="hero-art" aria-label="Decorative matrix illustration">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="hero-matrix"><span>1</span><span>0</span><span>2</span><span>3</span><span>5</span><span>8</span><span>1</span><span>4</span><span>9</span></div>
+          <span class="art-label label-top">A × B</span><span class="art-label label-bottom">LINEAR ALGEBRA / 001</span>
+        </div>
+      </section>
+
+      <section class="workspace" aria-labelledby="workspace-title">
+        <div class="section-heading">
+          <div><div class="eyebrow muted">THE WORKBENCH</div><h2 id="workspace-title">Build your matrices</h2></div>
+          <button type="button" id="reset-button" class="text-button"><span aria-hidden="true">↺</span> Restore sample values</button>
+        </div>
+
+        <div class="matrix-grid">
+          <article class="matrix-card matrix-a-card">
+            <div class="matrix-card-head"><div class="matrix-name"><span class="matrix-letter letter-a">A</span><div><h3>Matrix A</h3><p>Input matrix · 3 × 3</p></div></div><span class="dimension-tag" id="dimension-a">3 × 3</span></div>
+            <div class="matrix-editor" id="matrix-a" aria-label="Editable Matrix A"></div>
+            <div class="card-foot"><span class="tiny-square square-a"></span> <span>Change any cell value</span><span class="matrix-shape">A ∈ ℝ³ˣ³</span></div>
+          </article>
+
+          <div class="relation-mark" aria-hidden="true"><span>+</span><small>OR</small><span>×</span></div>
+
+          <article class="matrix-card matrix-b-card">
+            <div class="matrix-card-head"><div class="matrix-name"><span class="matrix-letter letter-b">B</span><div><h3>Matrix B</h3><p>Input matrix · 3 × 3</p></div></div><span class="dimension-tag" id="dimension-b">3 × 3</span></div>
+            <div class="matrix-editor" id="matrix-b" aria-label="Editable Matrix B"></div>
+            <div class="card-foot"><span class="tiny-square square-b"></span> <span>Change any cell value</span><span class="matrix-shape">B ∈ ℝ³ˣ³</span></div>
+          </article>
+        </div>
+
+        <div class="operation-panel">
+          <div class="operation-intro"><span class="eyebrow muted">CHOOSE AN OPERATION</span><h3>What should we calculate?</h3><p>Each action is processed on the server with NumPy.</p></div>
+          <div class="operation-buttons" role="group" aria-label="Matrix operations">
+            <button type="button" class="operation-button active" data-operation="add"><span class="op-symbol">＋</span><span><strong>Addition</strong><small>A + B</small></span></button>
+            <button type="button" class="operation-button" data-operation="subtract"><span class="op-symbol">−</span><span><strong>Subtraction</strong><small>A − B</small></span></button>
+            <button type="button" class="operation-button" data-operation="multiply"><span class="op-symbol">×</span><span><strong>Matrix multiply</strong><small>A @ B</small></span></button>
+            <button type="button" class="operation-button" data-operation="transpose_a"><span class="op-symbol transpose-symbol">ᵀ</span><span><strong>Transpose A</strong><small>A.T</small></span></button>
+            <button type="button" class="operation-button" data-operation="transpose_b"><span class="op-symbol transpose-symbol">ᵀ</span><span><strong>Transpose B</strong><small>B.T</small></span></button>
+          </div>
+          <div class="compute-row"><p><span class="live-pulse"></span> Ready to calculate <span id="selected-operation">addition</span></p><button type="button" id="compute-button" class="compute-button">Run calculation <span aria-hidden="true">↗</span></button></div>
+        </div>
+
+        <section class="result-section" aria-labelledby="result-heading" aria-live="polite">
+          <div class="result-head"><div><div class="eyebrow muted">OUTPUT / NUMPY RESULT</div><h2 id="result-heading">Your result <span class="result-equation" id="result-equation">A + B</span></h2></div><span class="result-badge" id="result-badge">AWAITING RUN</span></div>
+          <div class="result-body" id="result-body">
+            <div class="empty-result"><div class="empty-icon">[ ]</div><h3>Your answer will appear here</h3><p>Choose an operation and press <strong>Run calculation</strong> to see the NumPy result.</p></div>
+          </div>
+          <div class="result-note" id="result-note"><span class="note-icon">i</span><p>Tip: use square matrices for this sample so that every operation is available. Matrix multiplication requires the number of columns in A to match the number of rows in B.</p></div>
+        </section>
+      </section>
+
+      <section class="concepts" aria-labelledby="concepts-title">
+        <div class="concepts-heading"><div class="eyebrow">THE CONCEPT, QUICKLY</div><h2 id="concepts-title">Five operations. One foundation.</h2><p>Matrix maths helps represent, transform, and combine numerical information in machine learning.</p></div>
+        <div class="concept-grid">
+          <article class="concept-card"><span class="concept-index">01</span><div class="concept-icon">＋</div><h3>Addition</h3><p>Combine values at matching row and column positions. Both matrices must have the same shape.</p><code>np.add(A, B)</code></article>
+          <article class="concept-card"><span class="concept-index">02</span><div class="concept-icon">−</div><h3>Subtraction</h3><p>Find the difference between corresponding elements in two same-shaped matrices.</p><code>np.subtract(A, B)</code></article>
+          <article class="concept-card"><span class="concept-index">03</span><div class="concept-icon">×</div><h3>Multiplication</h3><p>Compute row-column dot products. A's column count must equal B's row count.</p><code>A @ B</code></article>
+          <article class="concept-card"><span class="concept-index">04</span><div class="concept-icon">ᵀ</div><h3>Transpose</h3><p>Flip rows and columns. An element at position (i, j) moves to (j, i).</p><code>A.T</code></article>
+        </div>
+      </section>
+
+      <footer class="footer"><div class="footer-brand"><span class="footer-mark">M.</span><span><strong>Matrix Studio</strong><small>Built for learning · Powered by Python + NumPy</small></span></div><span class="footer-right">AI &amp; ML TRACK <span>•</span> TASK 14</span></footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
